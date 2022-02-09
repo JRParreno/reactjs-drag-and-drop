@@ -1,5 +1,6 @@
-import { Box, Grid, Typography } from "@mui/material";
+import { Grid } from "@mui/material";
 import { Map } from "../models/Map";
+import DragCard from "./DragCard";
 
 interface IProps {
     mapInitData: Array<Map>;
@@ -20,28 +21,10 @@ export default function Board(props: IProps) {
             alignItems={"center"}
         >
             {props.mapInitData.map((data: Map, index: number) => (
-                <Box
-                    display={"flex"}
+                <DragCard
                     key={index}
-                    sx={{
-                        height: 100,
-                        width: 200,
-                        backgroundColor: data.isObstacle ? 'red' : '#1E1E1E',
-                        '&:hover': {
-                            backgroundColor: data.isObstacle ? 'red' : 'primary.main',
-                            opacity: data.isObstacle ? 1 : [0.9, 0.8, 0.7],
-                        },
-                        boxShadow: 5,
-                    }}
-                    justifyContent={'center'}
-                    alignItems={'center'}
-                >
-                    <Typography
-                        color={"white"}
-                    >
-                        {data.id}
-                    </Typography>
-                </Box>
+                    map={data}
+                />
             ))}
         </Grid>
     );

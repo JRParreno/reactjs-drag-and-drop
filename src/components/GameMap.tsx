@@ -1,5 +1,6 @@
-import { Box, Grid, } from "@mui/material";
-import { Card } from "../models/Card";
+import { Grid, } from "@mui/material";
+import { useContext, useEffect } from "react";
+import MapContext from "../contexts/CardContext";
 import Board from "./Board";
 import CardContainer from "./CardContainer";
 
@@ -9,6 +10,8 @@ interface IProps {
 
 export default function GameMap(props: IProps) {
 
+    const mapContext = useContext(MapContext);
+    const mapValues = mapContext.mapState.map["map"];
     const maps = [
         {
             id: "1",
@@ -94,6 +97,10 @@ export default function GameMap(props: IProps) {
         }
     ]
 
+    useEffect(() => {
+        mapContext.mapDispatch({ type: 'set_map', payload: { pk: "-1", maps: maps } });
+    }, []);
+
     return (
         <Grid
             container
@@ -103,10 +110,11 @@ export default function GameMap(props: IProps) {
             style={{ minHeight: '100vh' }}
             spacing={2}
         >
-
-            <Board
-                mapInitData={[...maps.sort(() => .5 - Math.random())]}
-            />
+            {mapValues && mapValues.length > 0 &&
+                <Board
+                    mapInitData={mapValues}
+                />
+            }
 
             <CardContainer
                 cards={cards}
