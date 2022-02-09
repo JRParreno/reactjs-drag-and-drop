@@ -5,7 +5,7 @@ interface IProps {
     mapInitData: Array<Map>;
 }
 
-function Board(props: IProps) {
+export default function Board(props: IProps) {
 
     return (
         <Grid
@@ -26,10 +26,10 @@ function Board(props: IProps) {
                     sx={{
                         height: 100,
                         width: 200,
-                        backgroundColor: '#1E1E1E',
+                        backgroundColor: data.isObstacle ? 'red' : '#1E1E1E',
                         '&:hover': {
-                            backgroundColor: 'primary.main',
-                            opacity: [0.9, 0.8, 0.7],
+                            backgroundColor: data.isObstacle ? 'red' : 'primary.main',
+                            opacity: data.isObstacle ? 1 : [0.9, 0.8, 0.7],
                         },
                         boxShadow: 5,
                     }}
@@ -46,5 +46,3 @@ function Board(props: IProps) {
         </Grid>
     );
 }
-
-export default Board;

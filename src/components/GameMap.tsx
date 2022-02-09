@@ -1,18 +1,19 @@
 import { Box, Grid, } from "@mui/material";
 import { Card } from "../models/Card";
 import Board from "./Board";
+import CardContainer from "./CardContainer";
 
 interface IProps {
     children?: any;
 }
 
-function GameMap(props: IProps) {
+export default function GameMap(props: IProps) {
 
     const maps = [
         {
             id: "1",
             isOccupied: false,
-            isObstacle: false,
+            isObstacle: true,
             card: undefined
         },
         {
@@ -24,7 +25,7 @@ function GameMap(props: IProps) {
         {
             id: "4",
             isOccupied: false,
-            isObstacle: false,
+            isObstacle: true,
             card: undefined
         },
         {
@@ -42,7 +43,7 @@ function GameMap(props: IProps) {
         {
             id: "7",
             isOccupied: false,
-            isObstacle: false,
+            isObstacle: true,
             card: undefined
         },
         {
@@ -64,6 +65,33 @@ function GameMap(props: IProps) {
             card: undefined
         },
 
+    ];
+
+    const cards = [
+        {
+            id: "A",
+            name: "SMITH"
+        },
+        {
+            id: "B",
+            name: "DOE"
+        },
+        {
+            id: "C",
+            name: "WALKER"
+        },
+        {
+            id: "D",
+            name: "JAMES"
+        },
+        {
+            id: "E",
+            name: "PETER"
+        },
+        {
+            id: "F",
+            name: "PARKER"
+        }
     ]
 
     return (
@@ -77,24 +105,14 @@ function GameMap(props: IProps) {
         >
 
             <Board
-                mapInitData={maps}
+                mapInitData={[...maps.sort(() => .5 - Math.random())]}
             />
-            <Grid item xs={4}>
-                <Box
-                    sx={{
-                        width: 500,
-                        height: 300,
-                        backgroundColor: 'primary.dark',
-                        '&:hover': {
-                            backgroundColor: 'primary.main',
-                            opacity: [0.9, 0.8, 0.7],
-                        },
-                    }}
-                />
-            </Grid>
+
+            <CardContainer
+                cards={cards}
+            />
+
         </Grid>
 
     );
 }
-
-export default GameMap;
